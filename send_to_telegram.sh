@@ -4,6 +4,7 @@
 #
 # create config in one of the locations:
 #    ~/.send_to_telegram.conf
+#    $HOME/.send_to_telegram.conf
 #    /etc/send_to_telegram.conf
 #
 # add 2 variables GROUP_ID and BOT_TOKEN 
@@ -36,13 +37,16 @@ if [ -z "$BOT_TOKEN" ]; then
   exit 0
 fi
 
+## checking if some information arrived via stdin
+declare -a Arguments=("$@")
+[[ -p /dev/stdin ]] && { mapfile -t -O ${#Arguments[@]} Arguments; set -- "${Arguments[@]}"; }
+
 if [ "$1" == "-h" ]; then
   echo "Usage: `basename $0` \"message to sent\"" >&2
   exit 0
 fi
 
-if [ -z "$1" ]
-  then
+if [ -z "$1" ]; then
     echo "Please add message" >&2
     exit 0
 fi
