@@ -29,7 +29,10 @@ $ which send_to_telegram.sh
 ## SETUP
 2 ways to setup:
 1. store credentials in script
-2. store credentials in user config file
+2. store credentials in user config file which currently can be located in following locations (first come - first use):
+    1. ```~/.send_to_telegram.conf```
+    2. ```$HOME/.send_to_telegram.conf```
+    3. ```/etc/send_to_telegram.conf```
 
 First option - just modify 3rd and 4th line in send_to_telegram
 Second option - create the following file:
@@ -42,4 +45,5 @@ GROUP_ID=your group id
 ## TEST
 ```
 $ send_to_telegram.sh "My first test message"
+$ echo "My pipe test message" | send_to_telegram.sh
 ```
