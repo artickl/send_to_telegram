@@ -15,6 +15,8 @@
 #
 ######################
 
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
 GROUP_ID=""
 BOT_TOKEN=""
 
@@ -47,8 +49,11 @@ if [ "$1" == "-h" ]; then
 fi
 
 if [ -z "$1" ]; then
+  if [ -t 0 ]; then
+    # printing message only if run from terminal (interactively)
     echo "Please add message" >&2
-    exit 0
+  fi
+  exit 0
 fi
 
 if [ "$#" -ne 1 ]; then
